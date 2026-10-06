@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --text: #1e1e1e;
+  --text-sub: #6e6e6e;
+  --placeholder: #8a8a8a;
+  --border: #eeeeee;
+  /* 스킬 기본값 #2AC1BC 는 흰 글자와 명암비 3:1 미만이라 어둡게 조정 */
+  --accent: #0e8a85;
+  --accent-hover: #0b726e;
+  --hover-bg: #e9f9f8;
+  --point: #ffd600;
+  --error: #f04452;
+  --shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+  line-height: 1.6;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* hover 효과는 서버 컴포넌트에서도 쓸 수 있도록 CSS 클래스로 정의 */
+.card-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-primary {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn-primary:disabled {
+  background: var(--border);
+  color: var(--text-sub);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.btn-secondary:hover {
+  background: #d3f2f0;
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.item-hover {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.item-hover:hover {
+  background: var(--hover-bg);
+  color: var(--accent);
+}
+
+.input-field {
+  transition: border-color 0.2s ease;
+}
+.input-field::placeholder {
+  color: var(--placeholder);
+}
+.input-field:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.link-title {
+  transition: color 0.2s ease;
+}
+a:hover .link-title {
+  color: var(--accent);
+}
+
+/* 폴더 행에 마우스를 올리거나 키보드 포커스 시 수정/삭제 버튼 노출 */
+.folder-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.folder-row:hover .folder-actions,
+.folder-row:focus-within .folder-actions {
+  opacity: 1;
+}
+.folder-edit,
+.folder-delete {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.folder-edit:hover {
+  background: var(--hover-bg);
+  color: var(--accent);
+}
+.folder-delete:hover {
+  background: #fde8ea;
+  color: #c4202e;
+}
+
+.btn-danger {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.btn-danger:hover {
+  background: #d93a47;
+}
+.btn-danger:active {
+  transform: scale(0.97);
+}
+
+.kakao-btn {
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.kakao-btn:hover {
+  filter: brightness(0.95);
+}
+.kakao-btn:active {
+  transform: scale(0.97);
 }
